@@ -39,11 +39,11 @@ public class RegistrarmeActivity extends AppCompatActivity {
         Integer pregunta;
         boolean nombre_usuario_ok =true;
 
-        nombre_usuario = tilUsuario.getEditText().toString();
-        nombre = tilNombre.getEditText().toString();
-        apellido = tilApellido.getEditText().toString();
-        contrasenia = tilContra.getEditText().toString();
-        pregunta = Integer.parseInt(tilPregunta.getEditText().toString());
+        nombre_usuario = tilUsuario.getEditText().getText().toString();
+        nombre = tilNombre.getEditText().getText().toString();
+        apellido = tilApellido.getEditText().getText().toString();
+        contrasenia = tilContra.getEditText().getText().toString();
+        pregunta = Integer.parseInt(tilPregunta.getEditText().getText().toString());
 
         lasCuentas = new ArrayList<Cuenta>();
         for(Cuenta c : lasCuentas){
@@ -64,7 +64,7 @@ public class RegistrarmeActivity extends AppCompatActivity {
 //        if (contrasenia.isEmpty()) {
 //            tilContra.setError("Debe ingresar una constraseña");
 //        }
-        //if (pregunta.isEmpty()) {
+        //if (tilPregunta.getEditText().getText().toString()) {
         //    tilPregunta.setError("Debe ingresar una constraseña");
        }
         else{
