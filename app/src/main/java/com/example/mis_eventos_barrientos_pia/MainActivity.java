@@ -1,11 +1,13 @@
 package com.example.mis_eventos_barrientos_pia;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 //IMPORTACIONES DISTINTAS POR VERSION
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.textfield.TextInputLayout;
@@ -36,26 +38,36 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void miCuenta(){
-        // TODO: VALIDACION DE USUARIO CONTRA BD
         // TODO: GUARDAR ULTIMO USUARIO EN UNA TABLA PARA MOSTRARLO EN LA NUEVA ENTRADA
 
-        Intent pantallaMiCuenta = new Intent(this, MiCuentaActivity.class);
-        startActivity(pantallaMiCuenta);
+        if (consultaLoginSQL(tilNombreUsuario.getEditText().getText().toString(), tilContrasenia.getEditText().getText().toString())){
+            Toast.makeText(this, "LOGIN CORRECTO!!!!", Toast.LENGTH_SHORT).show();
+            Intent pantallaMiCuenta = new Intent(this, MiCuentaActivity.class);
+            startActivity(pantallaMiCuenta);
+        }else {
+            Toast.makeText(this, "Nombre o Contraseña Incorrectos", Toast.LENGTH_SHORT).show();
+        }
     }
 
-    private void consultaSQL(){
+    private boolean consultaLoginSQL(String nombre, String contra){
         try {
-
+            boolean siono = false;
 
             AdminstradorBD adminbd = new AdminstradorBD(this, "BDAPP", null, 1);
             SQLiteDatabase miBD = adminbd.getWritableDatabase();
+            Cursor c = miBD.rawQuery("SELECT * FROM cuentas WHERE nombre_usuario = '"+nombre+"' AND contrasenia = '"+contra+"'", null);
+            if (c!=null && c.getCount()>0){
+                siono = true;
+            }
+            else {
+                siono = false;
 
-
-
-
-
+            }
+            miBD.close();
+            return siono;
         }catch (Exception e){
             Log.e("TAG_", e.toString());
+            return false;
         }
     }
 

@@ -79,6 +79,7 @@ public class RegistrarmeActivity extends AppCompatActivity {
                 lasCuentas.add(cuenta);
                 guardarBaseDatos(cuenta);
                 Toast.makeText(RegistrarmeActivity.this, "Grabado exitosamente", Toast.LENGTH_SHORT).show();
+                finish();
             }
             else{
                 tilUsuario.setError("Nombre de usuario ya existe.");
