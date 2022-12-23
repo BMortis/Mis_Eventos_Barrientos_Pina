@@ -1,5 +1,6 @@
 package com.example.mis_eventos_barrientos_pia;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -42,12 +43,49 @@ public class MainActivity extends AppCompatActivity {
 
         if (consultaLoginSQL(tilNombreUsuario.getEditText().getText().toString(), tilContrasenia.getEditText().getText().toString())){
             Toast.makeText(this, "LOGIN CORRECTO!!!!", Toast.LENGTH_SHORT).show();
+            consultaGuardarUltimo(tilNombreUsuario.getEditText().getText().toString());
+
+            String ultimo = consultaBuscarUltimo();
             Intent pantallaMiCuenta = new Intent(this, MiCuentaActivity.class);
+            tilNombreUsuario.getEditText().setText(ultimo);
+            tilContrasenia.getEditText().setText("");
             startActivity(pantallaMiCuenta);
         }else {
             Toast.makeText(this, "Nombre o Contraseña Incorrectos", Toast.LENGTH_SHORT).show();
         }
     }
+
+    private void consultaGuardarUltimo(String nombre_usuario){
+        try {
+            AdminstradorBD adminbd = new AdminstradorBD(this, "BDAPP", null, 1);
+            SQLiteDatabase miBD = adminbd.getWritableDatabase();
+
+            miBD.rawQuery("INSERT INTO ingresados(nombre_usuario) VALUES("+nombre_usuario+")", null);
+
+            miBD.close();
+        }catch (Exception ex){
+            Log.e("TAG_", ex.toString());
+        }
+    }
+
+    private String consultaBuscarUltimo(){
+        String ultimo = "";
+        try {
+            AdminstradorBD adminbd = new AdminstradorBD(this, "BDAPP", null, 1);
+            SQLiteDatabase miBD = adminbd.getWritableDatabase();
+
+            Cursor c = miBD.rawQuery("SELECT * FROM ingresados ORDER BY id DESC ", null);
+            if(c.moveToFirst()){
+                ultimo = c.getString(1);
+            }
+
+            miBD.close();
+        }catch (Exception ex){
+            Log.e("TAG_", ex.toString());
+        }
+        return ultimo;
+    }
+
 
     private boolean consultaLoginSQL(String nombre, String contra){
         try {
