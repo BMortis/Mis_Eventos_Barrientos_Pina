@@ -17,7 +17,7 @@ public class AdminstradorBD extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-            db.execSQL("create table cuentas(nombre_usuario text primary key, nombre text, apellido text, contrasenia text)");
+            db.execSQL("create table cuentas(nombre_usuario text primary key, nombre text, apellido text, contrasenia text, pregunta text)");
     }
 
     @Override

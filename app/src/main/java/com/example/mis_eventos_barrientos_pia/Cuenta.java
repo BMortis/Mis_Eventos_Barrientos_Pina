@@ -32,7 +32,7 @@ public class Cuenta {
     //region Constructores
     public Cuenta(){}
 
-    public Cuenta(String nombre, String apellido, String nombre_usuario, String contrasenia, Integer pregunta){
+    public Cuenta(String nombre, String apellido, String nombre_usuario,  String contrasenia, Integer pregunta){
        this.nombre = nombre;
        this.apellido = apellido;
        this.nombre_usuario = nombre_usuario;

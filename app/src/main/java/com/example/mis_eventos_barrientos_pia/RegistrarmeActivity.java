@@ -4,10 +4,15 @@ package com.example.mis_eventos_barrientos_pia;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.textfield.TextInputLayout;
 
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+
 //IMPORTACIONES GABO
 //import android.support.v7.app.AppCompatActivity;
 //import android.support.design.widget.TextInputLayout;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -34,6 +39,7 @@ public class RegistrarmeActivity extends AppCompatActivity {
 
     }
 
+    //TODO: VALIDAR DATOS VACIOS O REPETIDOS
     private void guardarCuenta(){
         String nombre_usuario, nombre, apellido, contrasenia = "";
         Integer pregunta;
@@ -69,14 +75,38 @@ public class RegistrarmeActivity extends AppCompatActivity {
        }
         else{
             if(nombre_usuario_ok){
-                Cuenta cuenta = new Cuenta(nombre_usuario, nombre,apellido,contrasenia,pregunta);
+                Cuenta cuenta = new Cuenta(nombre,apellido,nombre_usuario,contrasenia,pregunta);
                 lasCuentas.add(cuenta);
+                guardarBaseDatos(cuenta);
                 Toast.makeText(RegistrarmeActivity.this, "Grabado exitosamente", Toast.LENGTH_SHORT).show();
             }
             else{
                 tilUsuario.setError("Nombre de usuario ya existe.");
         }
     }}
+
+    private void guardarBaseDatos(Cuenta cuenta) {
+        try{
+            AdminstradorBD adminbd = new AdminstradorBD(this, "BDAPP", null,1);
+            SQLiteDatabase miBD = adminbd.getWritableDatabase();
+
+            ContentValues reg =new ContentValues();
+            reg.put("nombre_usuario", cuenta.getNombre_usuario());
+            reg.put("contrasenia", cuenta.getContrasenia());
+            reg.put("nombre", cuenta.getNombre());
+            reg.put("apellido", cuenta.getApellido());
+            reg.put("pregunta", cuenta.getPregunta());
+
+            miBD.insert("cuentas", null,reg);
+
+            miBD.close();
+
+        }catch (Exception ex){
+            Log.e("TAG_", ex.toString());
+        }
+
+
+    }
 
     private void referencias(){
         tilNombre = findViewById(R.id.tilNombre);

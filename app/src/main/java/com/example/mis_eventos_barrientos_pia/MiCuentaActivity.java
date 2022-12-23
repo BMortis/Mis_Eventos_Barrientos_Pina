@@ -34,6 +34,7 @@ public class MiCuentaActivity extends AppCompatActivity {
         btnSalir = findViewById(R.id.btnSalir);
     }
 
+    //TODO: BOTON CAMBIAR CONTRASENA VER SI ES NUEVA ACTIVITY O AQUI MISMO
     private void eventos(){
         btnVer.setOnClickListener(new View.OnClickListener() {
             @Override
