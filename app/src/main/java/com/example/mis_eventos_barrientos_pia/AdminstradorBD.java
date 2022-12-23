@@ -20,6 +20,7 @@ public class AdminstradorBD extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         try {
             String[] tablas = {
+
                     "CREATE TABLE cuentas(nombre_usuario text primary key, nombre text, apellido text, contrasenia text, pregunta text);",
                     "CREATE TABLE ingresados(id integer primary key AUTOINCREMENT,nombre_usuario text);",
                     // ...
