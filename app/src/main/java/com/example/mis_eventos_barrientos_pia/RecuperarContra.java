@@ -33,11 +33,19 @@ public class RecuperarContra extends AppCompatActivity {
         if (tilRespuesta.getEditText().getText().toString().isEmpty()){
             tilRespuesta.getEditText().setError("Debe responder la pregunta!!");
         }else {
-            int pregunta = consultaPregunta(nombre_usuario);
-            if (pregunta == Integer.parseInt(tilRespuesta.getEditText().getText().toString())){
-                ConfirmarContrasenia();
-                Toast.makeText(this, "Contraseña cambiada correctamente", Toast.LENGTH_SHORT).show();
-                finish();
+            if (tilNuevaContra.getEditText().getText().toString().isEmpty()){
+                tilNuevaContra.getEditText().setError("Debe Ingresar Nueva Contraseña");
+            }else {
+                int pregunta = consultaPregunta(nombre_usuario);
+                if (pregunta == Integer.parseInt(tilRespuesta.getEditText().getText().toString())) {
+                    ConfirmarContrasenia();
+                    Toast.makeText(this, "Contraseña cambiada correctamente", Toast.LENGTH_SHORT).show();
+                    finish();
+
+                } else {
+                    tilRespuesta.getEditText().setError("RESPUESTA INCORRECTA");
+                    Toast.makeText(this, "INTENTA NUEVAMENTE!", Toast.LENGTH_SHORT).show();
+                }
             }
         }
     }
@@ -48,8 +56,9 @@ public class RecuperarContra extends AppCompatActivity {
             SQLiteDatabase miBD = adminbd.getWritableDatabase();
 
             String nueva = tilNuevaContra.getEditText().getText().toString();
-            String[] parametros = {nueva};
-            miBD.execSQL("UPDATE cuentas SET contrasenia = ? WHERE nombre_usuario = '"+nombre_usuario+"'", parametros);
+            String[] parametros = {nueva, nombre_usuario};
+            miBD.execSQL("UPDATE cuentas SET contrasenia = ? WHERE nombre_usuario = ?", parametros);
+            Toast.makeText(this, "Contraseña cambiada Correctamente", Toast.LENGTH_SHORT).show();
         }catch (Exception ex){
             Log.e("TAG_", ex.toString() );
         }
@@ -61,13 +70,15 @@ public class RecuperarContra extends AppCompatActivity {
             AdminstradorBD adminbd = new AdminstradorBD(this, "BDAPP", null, 1);
             SQLiteDatabase miBD = adminbd.getWritableDatabase();
             Cursor c = miBD.rawQuery("SELECT * FROM cuentas WHERE nombre_usuario = '"+nombre+"' ", null);
-            if (c!=null && c.getCount()>0){
+            if (c.moveToFirst()){
                 pregunta = c.getInt(4);
             }
             miBD.close();
 
         }catch (Exception e){
             Log.e("TAG_", e.toString());
+            Log.e("TAG_", "AQUI ESTOY");
+
         }
         return pregunta;
     }
@@ -76,7 +87,7 @@ public class RecuperarContra extends AppCompatActivity {
         tvTituloPregunta = findViewById(R.id.tvTituloPregunta);
         tvPregunta = findViewById(R.id.tvPregunta);
         tilRespuesta = findViewById(R.id.tilRespuesta);
-        tilNuevaContra = findViewById(R.id.tilNuevaContraseña);
+        tilNuevaContra = findViewById(R.id.tilNuevaContrasena);
         btnConfirmarRespuesta = findViewById(R.id.btnConfirmarRespuesta);
         btnVolver = findViewById(R.id.btnVolver);
         nombre_usuario = getIntent().getExtras().getString("nombre_usuario");
