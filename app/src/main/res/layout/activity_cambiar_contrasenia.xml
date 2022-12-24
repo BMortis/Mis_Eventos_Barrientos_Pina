@@ -7,46 +7,74 @@
     tools:context=".CambiarContrasenia">
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tilContraAntigua"
-        android:layout_width="409dp"
+        android:id="@+id/tilAntigua"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="26dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="26dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/tvTitulo">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="hint" />
+            android:hint="Contraseña Antigua" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout3"
-        android:layout_width="409dp"
+        android:id="@+id/tilNueva"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="@+id/tilContraAntigua"
-        app:layout_constraintStart_toStartOf="@+id/tilContraAntigua"
-        app:layout_constraintTop_toBottomOf="@+id/tilContraAntigua">
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/tilAntigua"
+        app:layout_constraintStart_toStartOf="@+id/tilAntigua"
+        app:layout_constraintTop_toBottomOf="@+id/tilAntigua">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="hint" />
+            android:hint="Contraseña Nueva" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="409dp"
+        android:id="@+id/tilRepetir"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="@+id/tilContraAntigua"
-        app:layout_constraintStart_toStartOf="@+id/tilContraAntigua"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout3">
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/tilAntigua"
+        app:layout_constraintStart_toStartOf="@+id/tilAntigua"
+        app:layout_constraintTop_toBottomOf="@+id/tilNueva">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="hint" />
+            android:hint="Repetir Contraseña Nueva" />
     </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/tvTitulo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="50dp"
+        android:text="Cambiar Contraseña"
+        android:textSize="50sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvUsuario" />
+
+    <TextView
+        android:id="@+id/tvUsuario"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:text="TextView"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

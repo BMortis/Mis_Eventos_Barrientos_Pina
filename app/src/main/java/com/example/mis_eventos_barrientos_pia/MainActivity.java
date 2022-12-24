@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
             AdminstradorBD adminbd = new AdminstradorBD(this, "BDAPP", null, 1);
             SQLiteDatabase miBD = adminbd.getWritableDatabase();
 
-            miBD.rawQuery("INSERT INTO ingresados(nombre_usuario) VALUES("+nombre_usuario+")", null);
+            miBD.rawQuery("INSERT INTO ingresados(usuario) VALUES('"+nombre_usuario+"')", null);
 
             miBD.close();
         }catch (Exception ex){
@@ -74,9 +74,11 @@ public class MainActivity extends AppCompatActivity {
             AdminstradorBD adminbd = new AdminstradorBD(this, "BDAPP", null, 1);
             SQLiteDatabase miBD = adminbd.getWritableDatabase();
 
-            Cursor c = miBD.rawQuery("SELECT * FROM ingresados ORDER BY id DESC ", null);
+            Cursor c = miBD.rawQuery("SELECT * FROM ingresados ORDER BY id DESC", null);
             if(c.moveToFirst()){
                 ultimo = c.getString(1);
+            }else{
+                Log.e("TAG_", "Error en la Query de Cursor"+ c.getCount());
             }
 
             miBD.close();
