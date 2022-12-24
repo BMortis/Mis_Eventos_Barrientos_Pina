@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
             consultaGuardarUltimo(tilNombreUsuario.getEditText().getText().toString());
 
             String ultimo = consultaBuscarUltimo();
+            //String ultimo = tilNombreUsuario.getEditText().getText().toString();
             Intent pantallaMiCuenta = new Intent(this, MiCuentaActivity.class);
             tilNombreUsuario.getEditText().setText(ultimo);
             tilContrasenia.getEditText().setText("");
@@ -60,7 +61,8 @@ public class MainActivity extends AppCompatActivity {
             AdminstradorBD adminbd = new AdminstradorBD(this, "BDAPP", null, 1);
             SQLiteDatabase miBD = adminbd.getWritableDatabase();
 
-            miBD.rawQuery("INSERT INTO ingresados(usuario) VALUES('"+nombre_usuario+"')", null);
+            String[] parametros = {nombre_usuario};
+            miBD.execSQL("INSERT INTO ingresados(usuario) VALUES(?)", parametros);
 
             miBD.close();
         }catch (Exception ex){

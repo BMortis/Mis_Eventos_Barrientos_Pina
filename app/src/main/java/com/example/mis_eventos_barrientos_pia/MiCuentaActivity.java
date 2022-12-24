@@ -34,12 +34,25 @@ public class MiCuentaActivity extends AppCompatActivity {
         btnSalir = findViewById(R.id.btnSalir);
     }
 
+    private void cambiarContrasenia(){
+        Intent pantallaContraNueva = new Intent(this, CambiarContrasenia.class);
+
+        startActivity(pantallaContraNueva);
+    }
+
     //TODO: BOTON CAMBIAR CONTRASENA VER SI ES NUEVA ACTIVITY O AQUI MISMO
     private void eventos(){
         btnVer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {verEventos();
 
+            }
+        });
+
+        btnCambiar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cambiarContrasenia();
             }
         });
     }
