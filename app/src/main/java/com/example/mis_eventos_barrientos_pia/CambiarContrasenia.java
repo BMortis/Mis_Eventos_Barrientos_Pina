@@ -44,37 +44,8 @@ public class CambiarContrasenia extends AppCompatActivity {
         }
     }
 
-
-/* CREO QUE ESTE METODO FUE INNECESARIO
-    private Cuenta ConsultaUsuario(){
-        Cuenta cuenta = new Cuenta();
-        String nombre = SacarUsuarioLogeado();
-        try {
-            AdminstradorBD adminbd = new AdminstradorBD(this, "BDAPP", null, 1);
-            SQLiteDatabase miBD = adminbd.getWritableDatabase();
-
-            Cursor c = miBD.rawQuery("SELECT * FROM cuentas WHERE nombre_usuario = '"+nombre+"'", null);
-            if(c.moveToFirst()){
-                String nombre_usuario = c.getString(0);
-                nombre = c.getString(1);
-                String apellido = c.getString(2);
-                String contrasenia = c.getString(3);
-                int pregunta = Integer.parseInt(c.getString(4));
-                cuenta = new Cuenta(nombre_usuario, nombre, apellido, contrasenia, pregunta);
-            }else{
-                Log.e("TAG_", "Error en la Query de Cursor"+ c.getCount());
-            }
-
-            miBD.close();
-        }catch (Exception ex){
-            Log.e("TAG_", ex.toString());
-        }
-        return cuenta;
-    }
-*/
     private boolean validarCampos(){
         boolean confirma = false, si = false;
-        do {
             if (tilAntigua.getEditText().getText().toString().isEmpty() || tilNueva.getEditText().getText().toString().isEmpty() || tilRepetir.getEditText().getText().toString().isEmpty()) {
                 if (tilAntigua.getEditText().getText().toString().isEmpty()) {
                     tilAntigua.getEditText().setError("Debe Llenar este campo");
@@ -90,13 +61,12 @@ public class CambiarContrasenia extends AppCompatActivity {
                     if (tilAntigua.getEditText().getText().toString().equals(tilNueva.getEditText().getText().toString())){
                         tilNueva.getEditText().setError("CONTRASEÑA DEBE SER DISTINTA A LA ANTERIOR!!");
                     }else {
-                        si = true;
+                        confirma = true;
                     }
                 }else {
                     tilRepetir.getEditText().setError("Debe ser igual a la NUEVA CONTRASEÑA!!");
                 }
             }
-        }while (!si);
         return confirma;
     }
 
