@@ -20,7 +20,7 @@ import com.google.android.material.textfield.TextInputLayout;
 
 public class MainActivity extends AppCompatActivity {
     private TextInputLayout tilNombreUsuario, tilContrasenia;
-    private Button btnIngresar, btnRegistrarme;
+    private Button btnIngresar, btnRegistrarme, btnRecuperar;
 
 
 
@@ -37,6 +37,20 @@ public class MainActivity extends AppCompatActivity {
     Intent pantallaRegistro = new Intent(this, RegistrarmeActivity.class);
     startActivity(pantallaRegistro);
     }
+    private void recuperar(){
+        if(tilNombreUsuario.getEditText().getText().toString().isEmpty()){
+            tilNombreUsuario.getEditText().setError("Debe escribir su usuario primero!");
+        }else {
+            if (consultaNombreUsuario(tilNombreUsuario.getEditText().getText().toString())){
+                Intent pantallaRecuperar = new Intent(this, RecuperarContra.class);
+                pantallaRecuperar.putExtra("nombre_usuario",tilNombreUsuario.getEditText().getText().toString());
+                startActivity(pantallaRecuperar);
+            }else {
+                tilNombreUsuario.getEditText().setError("Usuario no Existe!!");
+            }
+        }
+
+    }
 
     private void miCuenta(){
         // TODO: GUARDAR ULTIMO USUARIO EN UNA TABLA PARA MOSTRARLO EN LA NUEVA ENTRADA
@@ -46,7 +60,6 @@ public class MainActivity extends AppCompatActivity {
             consultaGuardarUltimo(tilNombreUsuario.getEditText().getText().toString());
 
             String ultimo = consultaBuscarUltimo();
-            //String ultimo = tilNombreUsuario.getEditText().getText().toString();
             Intent pantallaMiCuenta = new Intent(this, MiCuentaActivity.class);
             tilNombreUsuario.getEditText().setText(ultimo);
             tilContrasenia.getEditText().setText("");
@@ -113,11 +126,33 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private boolean consultaNombreUsuario(String nombre){
+        boolean siono = false;
+        try {
+            AdminstradorBD adminbd = new AdminstradorBD(this, "BDAPP", null, 1);
+            SQLiteDatabase miBD = adminbd.getWritableDatabase();
+            Cursor c = miBD.rawQuery("SELECT * FROM cuentas WHERE nombre_usuario = '"+nombre+"' ", null);
+            if (c!=null && c.getCount()>0){
+                siono = true;
+            }
+            else {
+                siono = false;
+            }
+            miBD.close();
+
+        }catch (Exception e){
+            Log.e("TAG_", e.toString());
+        }
+        return siono;
+    }
+
+
     private void referencias(){
         tilNombreUsuario = findViewById(R.id.tilNombreUsuario);
         tilContrasenia = findViewById(R.id.tilConstrasenia);
         btnIngresar = findViewById(R.id.btnIngresar);
         btnRegistrarme = findViewById(R.id.btnRegistrarme);
+        btnRecuperar = findViewById(R.id.btnRecuperar);
     }
 
     private void eventos(){
@@ -128,9 +163,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
         btnIngresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {miCuenta();
+
+            }
+        });
+        btnRecuperar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {recuperar();
 
             }
         });

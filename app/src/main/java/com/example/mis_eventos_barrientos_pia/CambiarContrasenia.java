@@ -36,8 +36,9 @@ public class CambiarContrasenia extends AppCompatActivity {
             if (validarCampos()) {
                 String nueva = tilNueva.getEditText().getText().toString();
                 String[] parametros = {nueva};
-                miBD.execSQL("UPDATE cuentas SET contrasenia = ?", parametros);
+                miBD.execSQL("UPDATE cuentas SET contrasenia = ? WHERE nombre_usuario = '"+tvUser.getText().toString()+"'", parametros);
                 Toast.makeText(this, "Contraseña cambiada correctamente", Toast.LENGTH_SHORT).show();
+                finish();
             }
         }catch (Exception ex){
             Log.e("TAG_", ex.toString() );

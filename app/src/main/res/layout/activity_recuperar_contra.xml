@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/tilNuevaContraseña"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".RecuperarContra">
@@ -36,14 +37,14 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="AQUI VA LA PREGUNTA"
+        android:text="En Que año Nacio tu Madre?"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/tvTituloPregunta"
         app:layout_constraintStart_toStartOf="@+id/tvTituloPregunta"
         app:layout_constraintTop_toBottomOf="@+id/tvTituloPregunta" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout3"
+        android:id="@+id/tilRespuesta"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -60,12 +61,34 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/btnConfirmarRespuesta"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="40dp"
         android:text="Confirmar Respuesta"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/textInputLayout3"
-        app:layout_constraintStart_toStartOf="@+id/textInputLayout3" />
+        app:layout_constraintEnd_toEndOf="@+id/tilRespuesta" />
+
+    <Button
+        android:id="@+id/btnVolver"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Volver"
+        app:layout_constraintEnd_toStartOf="@+id/btnConfirmarRespuesta"
+        app:layout_constraintStart_toStartOf="@+id/tilRespuesta"
+        tools:layout_editor_absoluteY="516dp" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="@+id/tilRespuesta"
+        app:layout_constraintStart_toStartOf="@+id/tilRespuesta"
+        app:layout_constraintTop_toBottomOf="@+id/tilRespuesta">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nueva Contraseña" />
+    </com.google.android.material.textfield.TextInputLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
