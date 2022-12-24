@@ -15,12 +15,14 @@
         android:layout_marginEnd="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTitulo">
+        app:layout_constraintTop_toBottomOf="@+id/tvTitulo"
+        app:passwordToggleEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Contraseña Antigua" />
+            android:hint="Contraseña Antigua"
+            android:inputType="textPassword"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -30,12 +32,14 @@
         android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="@+id/tilAntigua"
         app:layout_constraintStart_toStartOf="@+id/tilAntigua"
-        app:layout_constraintTop_toBottomOf="@+id/tilAntigua">
+        app:layout_constraintTop_toBottomOf="@+id/tilAntigua"
+        app:passwordToggleEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Contraseña Nueva" />
+            android:hint="Contraseña Nueva"
+            android:inputType="textPassword"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -45,12 +49,14 @@
         android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="@+id/tilAntigua"
         app:layout_constraintStart_toStartOf="@+id/tilAntigua"
-        app:layout_constraintTop_toBottomOf="@+id/tilNueva">
+        app:layout_constraintTop_toBottomOf="@+id/tilNueva"
+        app:passwordToggleEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Repetir Contraseña Nueva" />
+            android:hint="Repetir Contraseña Nueva"
+            android:inputType="textPassword"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
