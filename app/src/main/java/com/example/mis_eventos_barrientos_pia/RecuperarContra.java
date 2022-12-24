@@ -57,8 +57,16 @@ public class RecuperarContra extends AppCompatActivity {
 
             String nueva = tilNuevaContra.getEditText().getText().toString();
             String[] parametros = {nueva, nombre_usuario};
-            miBD.execSQL("UPDATE cuentas SET contrasenia = ? WHERE nombre_usuario = ?", parametros);
-            Toast.makeText(this, "Contraseña cambiada Correctamente", Toast.LENGTH_SHORT).show();
+            Cursor c = miBD.rawQuery("SELECT * FROM cuentas WHERE nombre_usuario = '"+nombre_usuario+"' ", null);
+            if (c.moveToFirst()){
+                String contrasenia = c.getString(3);
+                if (contrasenia.equals(nueva)){
+                    Toast.makeText(this, "La Contraseña debe ser DISTINTA A LA ANTERIOR", Toast.LENGTH_SHORT).show();
+                }else {
+                    miBD.execSQL("UPDATE cuentas SET contrasenia = ? WHERE nombre_usuario = ?", parametros);
+                    Toast.makeText(this, "Contraseña cambiada Correctamente", Toast.LENGTH_SHORT).show();
+                }
+            }
         }catch (Exception ex){
             Log.e("TAG_", ex.toString() );
         }
