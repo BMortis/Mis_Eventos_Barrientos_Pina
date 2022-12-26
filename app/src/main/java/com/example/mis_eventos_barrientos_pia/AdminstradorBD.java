@@ -22,9 +22,11 @@ public class AdminstradorBD extends SQLiteOpenHelper {
             String[] tablas = {
                     "CREATE TABLE cuentas(nombre_usuario text primary key, nombre text, apellido text, contrasenia text, pregunta text);",
                     "CREATE TABLE ingresados(id integer primary key AUTOINCREMENT,usuario text);",
-                    "CREATE TABLE eventos(titulo text primary key, fechaEvento text, importancia text, observacion text, lugar text, tiempoAviso text, FOREIGN KEY(nombre_usuario) text REFERENCES cuentas(nombre_usuario)"
+                    "CREATE TABLE eventos(titulo text primary key, fechaEvento text, importancia text, observacion text, lugar text, tiempoAviso text);"
+
                     // ...
             };
+            /*, FOREIGN KEY(nombre_usuario) text REFERENCES cuentas(nombre_usuario*/
             for (String tabla : tablas) {
                 db.execSQL(tabla);
             }
@@ -32,8 +34,6 @@ public class AdminstradorBD extends SQLiteOpenHelper {
             Log.e("TAG_", "Error"+e.toString());
         }
 
-        //db.execSQL("create table cuentas(nombre_usuario text primary key, nombre text, apellido text, contrasenia text, pregunta text)");
-        //db.execSQL("create table ingresados(id integer primary key AUTOINCREMENT,nombre_usuario text)");
 
     }
 

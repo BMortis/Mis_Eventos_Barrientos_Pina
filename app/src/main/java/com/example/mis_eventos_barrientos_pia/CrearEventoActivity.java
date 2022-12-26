@@ -95,12 +95,12 @@ public class CrearEventoActivity extends AppCompatActivity {
             SQLiteDatabase miBD = adminbd.getWritableDatabase();
 
             ContentValues reg =new ContentValues();
-            reg.put("Titulo", evento.getTitulo());
-            reg.put("Fecha de Evento", evento.getFecha_evento());
-            reg.put("Importancias", evento.getImportancia());
-            reg.put("Lugar", evento.getLugar());
-            reg.put("Observacion", evento.getObservacion());
-            reg.put("Tiempo de Aviso", evento.getTiempo_aviso());
+            reg.put("titulo", evento.getTitulo());
+            reg.put("fechaEvento", evento.getFecha_evento());
+            reg.put("importancia", evento.getImportancia());
+            reg.put("lugar", evento.getLugar());
+            reg.put("observacion", evento.getObservacion());
+            reg.put("tiempoAviso", evento.getTiempo_aviso());
 
             miBD.insert("eventos", null,reg);
 
