@@ -8,7 +8,7 @@ import java.util.Date;
 
 public class Evento {
     private String titulo;
-    private Date fecha_evento;
+    private String fecha_evento;
     private String importancia;
     private String observacion;
     private String lugar;
@@ -20,7 +20,7 @@ public class Evento {
     //region Constructores
     public Evento(){}
 
-    public Evento(String titulo, Date fecha_evento, String importancia, String observacion, String lugar,
+    public Evento(String titulo, String fecha_evento, String importancia, String observacion, String lugar,
                   String tiempo_aviso){
         this.titulo = titulo;
         this.fecha_evento = fecha_evento;
@@ -42,11 +42,11 @@ public class Evento {
         this.titulo = titulo;
     }
 
-    public Date getFecha_evento() {
+    public String getFecha_evento() {
         return fecha_evento;
     }
 
-    public void setFecha_evento(Date fecha_evento) {
+    public void setFecha_evento(String fecha_evento) {
         this.fecha_evento = fecha_evento;
     }
 

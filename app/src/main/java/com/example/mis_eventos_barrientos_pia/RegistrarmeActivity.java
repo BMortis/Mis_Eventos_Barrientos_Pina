@@ -39,7 +39,7 @@ public class RegistrarmeActivity extends AppCompatActivity {
 
     }
 
-    //TODO: VALIDAR DATOS VACIOS O REPETIDOS
+
     private void guardarCuenta(){
         String nombre_usuario, nombre, apellido, contrasenia = "";
         Integer pregunta;

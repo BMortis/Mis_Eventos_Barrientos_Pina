@@ -21,7 +21,8 @@ public class AdminstradorBD extends SQLiteOpenHelper {
         try {
             String[] tablas = {
                     "CREATE TABLE cuentas(nombre_usuario text primary key, nombre text, apellido text, contrasenia text, pregunta text);",
-                    "CREATE TABLE ingresados(id integer primary key AUTOINCREMENT,usuario text);"
+                    "CREATE TABLE ingresados(id integer primary key AUTOINCREMENT,usuario text);",
+                    "CREATE TABLE eventos(titulo text primary key, fechaEvento text, importancia text, observacion text, lugar text, tiempoAviso text, FOREIGN KEY(nombre_usuario) text REFERENCES cuentas(nombre_usuario)"
                     // ...
             };
             for (String tabla : tablas) {
