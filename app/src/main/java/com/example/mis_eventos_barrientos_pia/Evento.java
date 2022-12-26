@@ -82,6 +82,15 @@ public class Evento {
         this.tiempo_aviso = tiempo_aviso;
     }
 
+    @Override
+    public String toString() {
+        return "Evento{" +
+                "titulo='" + titulo + '\'' +
+                ", fecha_evento='" + fecha_evento + '\'' +
+                ", importancia='" + importancia + '\'' +
+                '}';
+    }
+
     //endregion
 }
 
